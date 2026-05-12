@@ -7,7 +7,8 @@ const app = express();
 const PORT = 3000;
 
 app.use(express.json());
-app.use(express.static("public"));
+const path = require("path");
+app.use(express.static(path.join(__dirname, "public")));
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
@@ -15,7 +16,7 @@ const supabase = createClient(
 );
 
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/public/index.html");
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 // ─── USERS ────
